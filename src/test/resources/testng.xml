@@ -1,19 +1,18 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="FNO Tests" verbose="2">
+<suite name="Vamsi Tests" verbose="2">
 	<parameter name="browse" value="CHROME"></parameter>
     <parameter name="driverpath" value ="src/test/resources/chromedriver 4"></parameter>
 	<parameter name="testLogLevel" value = "info"></parameter>
 	<parameter name="baseURL" value ="http://the-internet.herokuapp.com"></parameter>
 
-
    <test name = "SmokeTest" preserve-order="true">
         <groups>
 			<run>
-				<include name='XXXXX'/>
+				<include name='test'/>
 			</run>
 		</groups>
   		<classes>
-  	 	     <class name="com.neselenim.test.XXXX"></class>
+  	 	     <class name="com.neselenium.tests.BasicTest"></class>
   	    </classes>
     </test>
   
