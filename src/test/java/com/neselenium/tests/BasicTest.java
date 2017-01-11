@@ -11,11 +11,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.neselenium.main.DriverInitializer;
 
 
 
-public class BasicTest extends DriverInitializer {
+public class BasicTest  {
 
     WebDriver driver = null;
     private long SLEEPTIME = 5000;
