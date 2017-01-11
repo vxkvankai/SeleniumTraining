@@ -15,5 +15,4 @@
   	 	     <class name="com.neselenium.tests.BasicTest"></class>
   	    </classes>
     </test>
-  
 </suite>
