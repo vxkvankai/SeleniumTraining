@@ -12,8 +12,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 
-
-
 public class BasicTest  {
 
     WebDriver driver = null;
@@ -65,7 +63,26 @@ public class BasicTest  {
 
     }
 
+    @Test(priority = 25, groups = {"test", "smoketest"})
+    public void LetsTalkTea() throws InterruptedException {
 
+       driver.findElement(By.linkText("Let's Talk Tea")).click();
+       Thread.sleep(SLEEPTIME);
+       Assert.assertEquals("Let's Talk Tea", driver.getTitle());
+
+  }
+
+
+    @Test(priority = 35, groups = {"test", "smoketest"})
+    public void CheckOut() throws InterruptedException {
+
+       driver.findElement(By.linkText("Check Out")).click();
+       Thread.sleep(SLEEPTIME);
+       Assert.assertEquals("Check Out", driver.getTitle());
+
+  }
+    
+    
     @AfterMethod(alwaysRun = true)
     public void logResults(ITestContext context, ITestResult result) {
 
