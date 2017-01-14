@@ -66,9 +66,9 @@ public class BasicTest  {
     @Test(priority = 25, groups = {"test", "smoketest"})
     public void LetsTalkTea() throws InterruptedException {
 
-       driver.findElement(By.linkText("Let's Talk Tea")).click();
+       driver.findElement(By.linkText("Let\'s Talk Tea")).click();
        Thread.sleep(SLEEPTIME);
-       Assert.assertEquals("Let's Talk Tea", driver.getTitle());
+       Assert.assertEquals("Let\'s Talk Tea", driver.getTitle());
 
   }
 
