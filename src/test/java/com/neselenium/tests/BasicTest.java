@@ -14,41 +14,31 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.drivers.Driverinit;
+import com.drivers.DriverInit;
 
 
-public class BasicTest  {
+public class BasicTest {
 
-    Driverinit driver = new Driverinit(null);
-	private long SLEEPTIME = 5000;
+   DriverInit driver = new DriverInit(null);
+    //WebDriver driver;
+    private long SLEEPTIME = 5000;
 
     @BeforeClass(alwaysRun = true)
     public void launchBrowser(ITestContext context) throws ClassNotFoundException {
 
-        System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver");
-        driver.setDriver(new FirefoxDriver());
-    	
-//    	System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
-//    	driver.setDriver(new ChromeDriver());
-        driver.getDriver().manage().window().maximize();
-
-        
-        // NOTE HERB: tried to set IE but it did not work. It lanuches blank Chrome browser 
-//        System.setProperty("webdriver.internetExplorer.driver", "src/test/resources/IEDriverServer.exe");
-//        driver.setDriver(new internetExplorer.driver());
-//        DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer(); 
-//        ieCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-       // driver = new InternetExplorerDriver(ieCapabilities);
-        //System.setProperty("browser", value)          WebDriver driver = new InternetExplorerDriver(ieCapabilities);
-      
-        //driver = DriverInitializer.getDriver();
-
     }
 
     @Test(priority = 10, groups = {"test", "smoketest"})
-    public void goToUrl() throws InterruptedException {
-
+    public void goToUrl(ITestContext context)  throws InterruptedException {
+        
+        System.setProperty("webdriver.gecko.driver", context.getCurrentXmlTest().getParameter("driverpath"));
+        //driver = new FirefoxDriver();
+        driver.initDriver(context);
+        
+        
         driver.getDriver().navigate().to("http://www.practiceselenium.com");
+  
+        driver.getDriver().manage().window().maximize();
 
         Thread.sleep(SLEEPTIME);
 
@@ -84,23 +74,23 @@ public class BasicTest  {
     @Test(priority = 25, groups = {"test", "smoketest"})
     public void LetsTalkTea() throws InterruptedException {
 
-       driver.getDriver().findElement(By.linkText("Let\'s Talk Tea")).click();
-       Thread.sleep(SLEEPTIME);
-       Assert.assertEquals("Let\'s Talk Tea", driver.getDriver().getTitle());
+        driver.getDriver().findElement(By.linkText("Let\'s Talk Tea")).click();
+        Thread.sleep(SLEEPTIME);
+        Assert.assertEquals("Let\'s Talk Tea", driver.getDriver().getTitle());
 
-  }
+    }
 
 
     @Test(priority = 35, groups = {"test", "smoketest"})
     public void CheckOut() throws InterruptedException {
 
-       driver.getDriver().findElement(By.linkText("Check Out")).click();
-       Thread.sleep(SLEEPTIME);
-       Assert.assertEquals("Check Out", driver.getDriver().getTitle());
+        driver.getDriver().findElement(By.linkText("Check Out")).click();
+        Thread.sleep(SLEEPTIME);
+        Assert.assertEquals("Check Out", driver.getDriver().getTitle());
 
-  }
-    
-    
+    }
+
+
     @AfterMethod(alwaysRun = true)
     public void logResults(ITestContext context, ITestResult result) {
 
