@@ -5,10 +5,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
 import org.testng.ITestContext;
 
 public class DriverInit {
+    
     private WebDriver driver;
 
     public DriverInit(WebDriver driver) {
@@ -52,11 +52,9 @@ public class DriverInit {
                 driver = new FirefoxDriver();
                 break;
 
-             
+
         }
 
-
     }
-		
-		
-	}
+
+}
