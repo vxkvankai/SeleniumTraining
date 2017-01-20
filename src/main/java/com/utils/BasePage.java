@@ -8,12 +8,10 @@ import com.drivers.DriverInit;
 
 public class BasePage extends DriverInit {
 
-
     public void clickElement(WebElement element) {
 
         wait.until(ExpectedConditions.elementToBeClickable(element)).sendKeys(Keys.RETURN);
 
     }
-
 
 }
