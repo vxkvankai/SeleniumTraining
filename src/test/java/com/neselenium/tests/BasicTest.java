@@ -2,10 +2,6 @@ package com.neselenium.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -14,33 +10,33 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.drivers.DriverInit;
+import com.utils.BasePage;
 
 
-public class BasicTest {
+public class BasicTest extends BasePage {
 
-   DriverInit driver = new DriverInit(null);
+    //DriverInit driver = new DriverInit(null);
     //WebDriver driver;
-    private long SLEEPTIME = 5000;
+    WebDriver d;
+
+
 
     @BeforeClass(alwaysRun = true)
     public void launchBrowser(ITestContext context) throws ClassNotFoundException {
 
+
+        d = driver.initDriver();
+
     }
 
     @Test(priority = 10, groups = {"test", "smoketest"})
-    public void goToUrl(ITestContext context)  throws InterruptedException {
-        
-        System.setProperty("webdriver.gecko.driver", context.getCurrentXmlTest().getParameter("driverpath"));
-        //driver = new FirefoxDriver();
-        driver.initDriver(context);
-        
-        
-        driver.getDriver().navigate().to("http://www.practiceselenium.com");
-  
-        driver.getDriver().manage().window().maximize();
+    public void goToUrl(ITestContext context) throws InterruptedException {
 
-        Thread.sleep(SLEEPTIME);
+
+
+        driver.getDriver().navigate().to("http://www.practiceselenium.com");
+
+
 
         Assert.assertEquals("Welcome", driver.getDriver().getTitle());
 

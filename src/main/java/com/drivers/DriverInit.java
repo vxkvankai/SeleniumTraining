@@ -5,14 +5,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 
 public class DriverInit {
-    
-    private WebDriver driver;
 
-    public DriverInit(WebDriver driver) {
-        this.driver = driver;
+    public static WebDriver driver;
+    public static WebDriverWait wait;
+
+
+    public DriverInit() {
+        //this.driver = driver;
     }
 
     public WebDriver getDriver() {
@@ -20,7 +23,7 @@ public class DriverInit {
     }
 
     public void setDriver(WebDriver driver) {
-        this.driver = driver;
+        DriverInit.driver = driver;
     }
 
     public void initDriver(ITestContext context) {
@@ -43,7 +46,7 @@ public class DriverInit {
 
             case "IE":
                 System.setProperty("webdriver.ie.driver", context.getCurrentXmlTest().getParameter("driverpath"));
-                WebDriver driver = new InternetExplorerDriver();
+                driver = new InternetExplorerDriver();
                 DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
                 ieCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 
@@ -54,6 +57,20 @@ public class DriverInit {
 
 
         }
+
+        setDriver(driver);
+        setWait();
+
+        driver.manage().window().maximize();
+
+    }
+
+    public void setWait() {
+        wait = new WebDriverWait(driver, 60);
+    }
+
+    public static WebDriverWait getWait() {
+        return wait;
 
     }
 
