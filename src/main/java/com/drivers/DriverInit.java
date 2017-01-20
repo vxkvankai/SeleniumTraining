@@ -1,5 +1,7 @@
 package com.drivers;
 
+import java.util.Set;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -11,6 +13,7 @@ import com.utils.TestngContext;
 
 public class DriverInit {
 
+    private static final long WAITTIME = 60;
     public static WebDriver driver;
     public static WebDriverWait wait;
 
@@ -58,7 +61,13 @@ public class DriverInit {
 
 
     public static void setWait() {
-        wait = new WebDriverWait(driver, 60);
+        long waittime = WAITTIME; //Default
+
+        Set<String> names = TestngContext.getContext().getAttributeNames();
+        if (names.contains("webdriverwait"))
+            waittime = Long.parseLong(TestngContext.getContext().getCurrentXmlTest().getParameter("webdriverwait"));
+
+        wait = new WebDriverWait(driver, waittime);
     }
 
     public static WebDriverWait getWait() {

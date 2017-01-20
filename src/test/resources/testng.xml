@@ -4,6 +4,8 @@
     <parameter name="driverpath" value ="src/test/resources/geckodriver"></parameter>
 	<parameter name="testLogLevel" value = "info"></parameter>
 	<parameter name="baseURL" value ="http://the-internet.herokuapp.com"></parameter>
+    <parameter name="webdriverwait" value ="30"></parameter> 
+
 
    <test name = "SmokeTest" preserve-order="true">
         <groups>
