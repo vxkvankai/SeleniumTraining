@@ -1,14 +1,16 @@
 package com.drivers;
 
+import org.testng.ITestContext;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.ITestContext;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class DriverInit {
-    
+    WebDriverWait wait;
     private WebDriver driver;
 
     public DriverInit(WebDriver driver) {
@@ -24,10 +26,6 @@ public class DriverInit {
     }
 
     public void initDriver(ITestContext context) {
-
-        //System.out.println("[ " + value + "] = [" + context.getCurrentXmlTest().getParameter(value) + "]");
-
-
 
         switch (context.getCurrentXmlTest().getParameter("browse")) {
 
@@ -54,7 +52,16 @@ public class DriverInit {
 
 
         }
+        setWait();
+        driver.manage().window().maximize();
+    }
+
+    public void setWait() {
+        wait = new WebDriverWait(driver, 60);
 
     }
 
+    public WebDriverWait getWait() {
+        return wait;
+    }
 }
