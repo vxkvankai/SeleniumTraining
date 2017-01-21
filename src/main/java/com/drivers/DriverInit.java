@@ -59,6 +59,14 @@ public class DriverInit {
         return getDriver();
     }
 
+    public void tearDown() {
+        if (driver != null) {
+            driver.close();
+            driver.quit();
+        }
+        driver = null;
+    }
+
 
     public static void setWait() {
         long waittime = WAITTIME; //Default

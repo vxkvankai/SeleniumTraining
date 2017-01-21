@@ -31,7 +31,7 @@ public class BasicTest extends BasePage {
     }
 
     @Test(priority = 10, groups = {"test", "smoketest"})
-    public void goToUrl(ITestContext context) {
+    public void goToUrl() {
 
         driver.get("http://www.practiceselenium.com");
 
@@ -83,13 +83,9 @@ public class BasicTest extends BasePage {
     }
 
     @AfterClass(alwaysRun = true)
-    public void terminateApp(ITestContext context) {
+    public void terminateApp() {
 
-        if (driver != null) {
-            driver.close();
-            driver.quit();
-        }
-        driver = null;
+        tearDown();
     }
 
 }
