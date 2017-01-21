@@ -1,114 +1,91 @@
 package com.neselenium.tests;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.ITestContext;
-import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.drivers.DriverInit;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import com.utils.BasePage;
+import com.utils.TestngContext;
 
 
-public class BasicTest {
+public class BasicTest extends BasePage {
 
-    WebDriver d;
-    WebDriverWait wait;
-    DriverInit driver = new DriverInit(null);
-    //WebDriver driver;
-    // private long SLEEPTIME = 5000;
+    By passionLink = By.xpath("//a[@data-title=\"Our Passion\"]");
+    By menuLink = By.xpath("//a[@data-title=\"Menu\"]");
+    By talkLink = By.xpath("//a[@data-title=\"Let's Talk Tea\"]");
+    By checkOutLink = By.xpath("//a[@data-title=\"Check Out\"]");
+
+    By email = By.id("email");
 
     @BeforeClass(alwaysRun = true)
-    public void launchBrowser(ITestContext context) throws ClassNotFoundException {
+    public void launchBrowser(ITestContext context) {
 
-        driver.initDriver(context);
-        wait = driver.getWait();
-        d = driver.getDriver();
-        d.navigate().to("http://www.practiceselenium.com");
+        //Putting the context into a static class to access from anywhere
+        TestngContext.setContext(context);
+
+        setDriver(); //get the driver;
 
     }
-
 
     @Test(priority = 10, groups = {"test", "smoketest"})
-    public void goToUrl(ITestContext context) throws InterruptedException {
+    public void goToUrl() {
 
-        Assert.assertTrue(wait.until(ExpectedConditions.titleContains("Welcome")));
+        driver.get("http://www.practiceselenium.com");
+
+        Assert.assertTrue(verifyTitle("Welcome"));
 
     }
-
 
     @Test(priority = 15, groups = {"test", "smoketest"})
     public void ourPassion() throws InterruptedException {
 
-        // d.findElement(By.xpath("//*[@data-title='Our Passion']")).click();
-
-        wait.until(ExpectedConditions.elementToBeClickable(d.findElement(By.xpath("//*[@data-title='Our Passion']"))))
-            .sendKeys(Keys.ENTER);
-        Assert.assertTrue(wait.until(ExpectedConditions.titleContains("Our Passion")));
+        clickElement(passionLink);
+        //clickElement(driver.findElement(By.xpath("//a[@data-title='Our Passion']")));
+        //Assert.assertTrue(wait.until(ExpectedConditions.titleContains("")));
+        Assert.assertTrue(verifyTitle("Our Passion"));
 
     }
-
 
     @Test(priority = 20, groups = {"test"})
-    public void clickMenu() throws InterruptedException {
+    public void clickMenu() {
 
-        wait.until(ExpectedConditions.elementToBeClickable(d.findElement(By.xpath("//*[@data-title='Menu']"))))
-            .sendKeys(Keys.RETURN);
-        Assert.assertTrue(wait.until(ExpectedConditions.titleContains("Menu")));
+        clickElement(menuLink);
+        //clickElement(driver.findElement(By.xpath("//*[@data-title='Menu']")));
+
+        //Assert.assertTrue(wait.until(ExpectedConditions.titleContains("Menu")));
+        Assert.assertTrue(verifyTitle("Menu"));
 
     }
-
 
     @Test(priority = 25, groups = {"test", "smoketest"})
-    public void LetsTalkTea() throws InterruptedException {
+    public void LetsTalkTea() {
 
-        // Herb, i replaced let's talk escape character in "d.findElement(By.linkText("Let\'s Talk Tea")).click()" with the following format: //*[@data-url='let-s-talk-tea.html'] ;
+        clickElement(talkLink);
+        //clickElement(driver.findElement(By.xpath("//a[@data-title=\"Let's Talk Tea\"]")));
 
-        wait.until(ExpectedConditions.elementToBeClickable(d.findElement(By.xpath("//*[@data-url='let-s-talk-tea.html']"))))
-            .sendKeys(Keys.RETURN);
-        Assert.assertTrue(wait.until(ExpectedConditions.titleContains("Let\'s Talk Tea")));
+        //Assert.assertTrue(wait.until(ExpectedConditions.titleContains("Let's Talk Tea")));
+        Assert.assertTrue(verifyTitle("Let's Talk Tea"));
+
     }
-
 
     @Test(priority = 35, groups = {"test", "smoketest"})
-    public void CheckOut() throws InterruptedException {
+    public void CheckOut() {
 
-        wait.until(ExpectedConditions.elementToBeClickable(d.findElement(By.xpath("//*[@data-title='Check Out']"))))
-            .sendKeys(Keys.RETURN);
-        //d.findElement(By.linkText("Check Out")).sendKeys(Keys.ENTER);
-        Assert.assertTrue(wait.until(ExpectedConditions.titleContains("Check Out")));
-        Thread.sleep(60);
-    }
+        clickElement(checkOutLink);
+        //clickElement(driver.findElement(By.xpath("//a[@data-title='Check Out']")));
 
-    @Test(priority = 40, groups = {"test", "smoketest"})
-    public void CustomerInfoForm() throws InterruptedException {
-
-        wait.until(ExpectedConditions.elementToBeClickable(d.findElement(By.xpath("//input[contains(@id,'email']"))))
-            .sendKeys("tester@test.com");
-        //        //d.findElement(By.linkText("Check Out")).sendKeys(Keys.ENTER);
-        //        Assert.assertTrue(wait.until(ExpectedConditions.titleContains("Check Out")));
-    }
-
-
-    @AfterMethod(alwaysRun = true)
-    public void logResults(ITestContext context, ITestResult result) {
+        //Assert.assertTrue(wait.until(ExpectedConditions.titleContains("Check Out")));
+        Assert.assertTrue(verifyTitle("Check Out"));
 
     }
 
     @AfterClass(alwaysRun = true)
-    public void terminateApp(ITestContext context) {
+    public void terminateApp() {
 
-        if (d != null) {
-            d.close();
-            d.quit();
-            driver.setDriver(null);
-        }
+        tearDown();
     }
 
 }
