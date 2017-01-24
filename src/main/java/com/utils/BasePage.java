@@ -1,11 +1,10 @@
 package com.utils;
 
+import com.drivers.DriverInit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import com.drivers.DriverInit;
 
 public class BasePage extends DriverInit {
 
@@ -28,4 +27,12 @@ public class BasePage extends DriverInit {
 
     }
 
+    // adding new method to send text
+
+    public void sendTextToInputFld(WebElement element_enter) {
+        element_enter.sendKeys("teter@test.com");
+        element_enter.sendKeys("tester");
+        element_enter.sendKeys("26000 Dodge st, Omaha NE 68123");
+
+    }
 }
