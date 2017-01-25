@@ -2,6 +2,7 @@ package com.drivers;
 
 import java.util.Set;
 
+import com.utils.TestngContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -9,11 +10,9 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.utils.TestngContext;
-
 public class DriverInit {
 
-    private static final long WAITTIME = 60;
+    private static final long WAITTIME = 30;
     public static WebDriver driver;
     public static WebDriverWait wait;
 
@@ -81,5 +80,7 @@ public class DriverInit {
     public static WebDriverWait getWait() {
         return wait;
     }
+
+
 
 }
