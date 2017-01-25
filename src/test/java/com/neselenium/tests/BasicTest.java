@@ -1,6 +1,5 @@
 package com.neselenium.tests;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
@@ -9,6 +8,7 @@ import org.testng.annotations.Test;
 
 import com.utils.BasePage;
 import com.utils.TestngContext;
+import org.openqa.selenium.By;
 
 
 public class BasicTest extends BasePage {
@@ -18,7 +18,20 @@ public class BasicTest extends BasePage {
     By talkLink = By.xpath("//a[@data-title=\"Let's Talk Tea\"]");
     By checkOutLink = By.xpath("//a[@data-title=\"Check Out\"]");
 
+
+    // Input field locators for customer info page
     By email = By.id("email");
+    By Name = By.id("name");
+    By Address = By.id("adress");
+    By CardType = By.id("card_type");
+    By CardNumber = By.id("card_number");
+    By CardHolderName = By.id("cardholder_name");
+    By VerificationCode = By.id("verification_code");
+    // ERROR:  By PlaceOrderBtn = By.className('btn btn-primary'); //button[@class='btn btn-primary']
+
+    // driver.findElement(By.xpath("//button[contains(@class,'btn btn-primary')]"));
+    //button[@class='btn btn-primary firepath-matching-node']
+
 
     @BeforeClass(alwaysRun = true)
     public void launchBrowser(ITestContext context) {
@@ -68,17 +81,6 @@ public class BasicTest extends BasePage {
 
         //Assert.assertTrue(wait.until(ExpectedConditions.titleContains("Let's Talk Tea")));
         Assert.assertTrue(verifyTitle("Let's Talk Tea"));
-
-    }
-
-    @Test(priority = 35, groups = {"test", "smoketest"})
-    public void CheckOut() {
-
-        clickElement(checkOutLink);
-        //clickElement(driver.findElement(By.xpath("//a[@data-title='Check Out']")));
-
-        //Assert.assertTrue(wait.until(ExpectedConditions.titleContains("Check Out")));
-        Assert.assertTrue(verifyTitle("Check Out"));
 
     }
 
