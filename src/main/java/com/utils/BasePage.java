@@ -1,13 +1,18 @@
 package com.utils;
 
-import com.drivers.DriverInit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import com.drivers.DriverInit;
+
 public class BasePage extends DriverInit {
+
+    public void goToUrl(String url) {
+        driver.get("http://www.practiceselenium.com");
+    }
 
     public void clickElement(WebElement element) {
 
