@@ -9,22 +9,16 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.utils.BasePage;
+import com.pages.CheckOutPage;
+import com.pages.NavLinkPage;
+import com.utils.BaseUtils;
 import com.utils.TestngContext;
-import org.openqa.selenium.By;
 
-public class CheckOutForm extends BasePage {
+public class CheckOutForm extends BaseUtils {
 
     // Input field locators for checkout page
-    By email = By.id("email");
-    By Name = By.id("name");
-    By Address = By.id("address");
-    By CardType = By.id("card_type");
-    By CardNumber = By.id("card_number");
-    By CardHolderName = By.id("cardholder_name");
-    By VerificationCode = By.id("verification_code");
-    By PlaceOrderBtn = By.xpath("//button[@class='btn btn-primary']");
-    By checkOutLink = By.xpath("//a[@data-title=\"Check Out\"]");
+    private NavLinkPage linksPage;
+    private CheckOutPage checkOutPage;
 
     @BeforeClass(alwaysRun = true)
     public void launchBrowser(ITestContext context) {
@@ -34,32 +28,58 @@ public class CheckOutForm extends BasePage {
 
         setDriver(); //get the driver;
 
-        driver.get("http://www.practiceselenium.com");
+        linksPage = new NavLinkPage(getDriver());
+        checkOutPage = new CheckOutPage(getDriver());
 
+        goToUrl("http://www.practiceselenium.com");
         Assert.assertTrue(verifyTitle("Welcome"));
 
     }
 
-    @Test
+    @Test(priority = 10)
     public void CheckOut() {
 
-        clickElement(checkOutLink);
+        clickElement(linksPage.checkOutLink);
         //clickElement(driver.findElement(By.xpath("//a[@data-title='Check Out']")));
         Assert.assertTrue(verifyTitle("Check Out"));
 
-        sendTextToInputFld(email, "vamsi@gmail.com");
-        sendTextToInputFld(Name, "vamsi");
-        sendTextToInputFld(Address, "21 dodge st, omaha");
-        sendTextToInputFld(CardNumber, "12345667889");
-        sendTextToInputFld(CardHolderName, "vamsi k");
-        sendTextToInputFld(VerificationCode, "231");
+        sendTextToInputFld(checkOutPage.email, "vamsi@gmail.com");
+        sendTextToInputFld(checkOutPage.name, "vamsi");
+        sendTextToInputFld(checkOutPage.address, "21 dodge st, omaha");
+        sendTextToInputFld(checkOutPage.cardNumber, "12345667889");
+        sendTextToInputFld(checkOutPage.cardHolderName, "vamsi k");
+        sendTextToInputFld(checkOutPage.verificationCode, "231");
 
 
 
-        selectDropDown(CardType, "Diners Club");
+        selectDropDown(checkOutPage.cardType, "Diners Club");
         // sleep(10000);
 
-        click(PlaceOrderBtn);
+        clickElement(checkOutPage.placeOrderBtn);
+        Assert.assertTrue(verifyTitle("Menu"));
+
+    }
+
+    @Test(priority = 20)
+    public void CheckOutCancel() {
+
+        clickElement(linksPage.checkOutLink);
+        //clickElement(driver.findElement(By.xpath("//a[@data-title='Check Out']")));
+        Assert.assertTrue(verifyTitle("Check Out"));
+
+        sendTextToInputFld(checkOutPage.email, "vamsi@gmail.com");
+        sendTextToInputFld(checkOutPage.name, "vamsi");
+        sendTextToInputFld(checkOutPage.address, "21 dodge st, omaha");
+        sendTextToInputFld(checkOutPage.cardNumber, "12345667889");
+        sendTextToInputFld(checkOutPage.cardHolderName, "vamsi k");
+        sendTextToInputFld(checkOutPage.verificationCode, "231");
+
+
+
+        selectDropDown(checkOutPage.cardType, "Diners Club");
+        // sleep(10000);
+
+        clickElement(checkOutPage.cancelBtn);
         Assert.assertTrue(verifyTitle("Menu"));
 
     }

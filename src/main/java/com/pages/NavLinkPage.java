@@ -6,9 +6,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
-public class LinkPages {
+public class NavLinkPage {
 
-    public LinkPages(WebDriver driver) {
+    public NavLinkPage(WebDriver driver) {
 
         PageFactory.initElements(driver, this);
 
@@ -16,6 +16,7 @@ public class LinkPages {
 
     @FindBy(how = How.XPATH, using = "//a[@data-title=\"Our Passion\"]")
     public WebElement passionLink;
+
 
     @FindBy(how = How.XPATH, using = "//a[@data-title=\"Menu\"]")
     public WebElement menuLink;
