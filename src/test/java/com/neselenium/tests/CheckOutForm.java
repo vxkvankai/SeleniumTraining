@@ -11,6 +11,8 @@ import org.testng.annotations.Test;
 
 import com.pages.CheckOutPage;
 import com.pages.NavLinkPage;
+import com.pages.OurPassionPage;
+import com.pages.WelcomePage;
 import com.utils.BaseUtils;
 import com.utils.TestngContext;
 
@@ -19,6 +21,8 @@ public class CheckOutForm extends BaseUtils {
     // Input field locators for checkout page
     private NavLinkPage linksPage;
     private CheckOutPage checkOutPage;
+    private WelcomePage welcomePage;
+    private OurPassionPage ourPassionPage;
 
     @BeforeClass(alwaysRun = true)
     public void launchBrowser(ITestContext context) {
@@ -29,6 +33,8 @@ public class CheckOutForm extends BaseUtils {
         setDriver(); //get the driver;
 
         linksPage = new NavLinkPage(getDriver());
+        welcomePage = new WelcomePage(getDriver());
+        ourPassionPage = new OurPassionPage(getDriver());
         checkOutPage = new CheckOutPage(getDriver());
 
         goToUrl("http://www.practiceselenium.com");

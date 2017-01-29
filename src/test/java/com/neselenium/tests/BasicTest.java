@@ -38,6 +38,15 @@ public class BasicTest extends BaseUtils {
     }
 
     @Test(priority = 15, groups = {"test", "smoketest"})
+    public void welcome() throws InterruptedException {
+
+        clickElement(linksPages.welcomeLink);
+
+        Assert.assertTrue(verifyTitle("Welcome"));
+
+    }
+
+    @Test(priority = 20, groups = {"test", "smoketest"})
     public void ourPassion() throws InterruptedException {
 
         clickElement(linksPages.passionLink);
@@ -46,7 +55,7 @@ public class BasicTest extends BaseUtils {
 
     }
 
-    @Test(priority = 20, groups = {"test"})
+    @Test(priority = 25, groups = {"test"})
     public void clickMenu() {
 
         clickElement(linksPages.menuLink);
@@ -55,13 +64,22 @@ public class BasicTest extends BaseUtils {
 
     }
 
-    @Test(priority = 25, groups = {"test", "smoketest"})
+    @Test(priority = 30, groups = {"test", "smoketest"})
     public void LetsTalkTea() {
 
         clickElement(linksPages.talkLink);
 
         Assert.assertTrue(verifyTitle("Let's Talk Tea"));
 
+
+    }
+
+    @Test(priority = 35, groups = {"test", "smoketest"})
+    public void welcomeTest() {
+
+        clickElement(linksPages.welcomeLink);
+
+        //Assert.assertTrue(verifyTitle("Let's Talk Tea"));
     }
 
     @AfterClass(alwaysRun = true)
