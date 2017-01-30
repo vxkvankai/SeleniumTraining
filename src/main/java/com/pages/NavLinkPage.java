@@ -17,6 +17,8 @@ public class NavLinkPage {
     @FindBy(how = How.XPATH, using = "//a[@data-title=\"Our Passion\"]")
     public WebElement passionLink;
 
+    @FindBy(how = How.XPATH, using = "//a[@data-title=\"Welcome\"]")
+    public WebElement welcomeLink;
 
     @FindBy(how = How.XPATH, using = "//a[@data-title=\"Menu\"]")
     public WebElement menuLink;
